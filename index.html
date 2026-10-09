@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Medhak Theory | Sunil Gupta</title>
   
-  <!-- Fonts: Inter & Noto Sans Devanagari -->
+  <!-- Google Fonts: Inter, Noto Sans Devanagari, and Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&family=Rozha+One&display=swap" rel="stylesheet">
   
-  <!-- Tailwind CSS CDN -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
   <script>
@@ -19,30 +19,36 @@
       theme: {
         extend: {
           colors: {
-            creme: {
-              50: '#FDFBF7',
-              100: '#F8F5EE',
-              200: '#EFE9DC',
-              300: '#DFD5C0',
+            cream: {
+              50: '#FDFCF9',
+              100: '#FAF8F5',
+              200: '#F3EFEA',
+              300: '#E7E0D5',
+              400: '#D5C9B8',
             },
-            pond: {
-              50: '#ECFDF5',
-              100: '#D1FAE5',
-              600: '#059669',
-              800: '#065F46',
-              900: '#064E3B',
-              950: '#022C22',
+            forest: {
+              700: '#2A553A',
+              800: '#1F402B',
+              900: '#163020',
+              950: '#0E2015',
             },
-            amberAccent: {
+            leaf: {
+              500: '#22C55E',
+              600: '#16A34A',
+            },
+            amberMilk: {
+              100: '#FEF3C7',
               400: '#FBBF24',
               500: '#F59E0B',
               600: '#D97706',
+              700: '#B45309',
             }
           },
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
             devanagari: ['"Noto Sans Devanagari"', 'sans-serif'],
-            serif: ['"Playfair Display"', 'serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            hindiTitle: ['"Rozha One"', '"Noto Sans Devanagari"', 'serif']
           }
         }
       }
@@ -50,614 +56,715 @@
   </script>
 
   <style>
-    /* Custom styling accents */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+    /* Custom subtle ambient backdrop */
+    .editorial-bg {
+      background-color: #FAF8F5;
+      background-image: radial-gradient(rgba(31, 64, 43, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
     }
-    .lily-pattern {
-      background-color: #fbf9f4;
-      background-image: radial-gradient(#10b981 0.75px, transparent 0.75px), radial-gradient(#d97706 0.75px, #fbf9f4 0.75px);
-      background-size: 30px 30px;
-      background-position: 0 0, 15px 15px;
-      background-opacity: 0.15;
+
+    .glass-nav {
+      background: rgba(250, 248, 245, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
-    .water-ripple {
-      animation: ripple 6s infinite ease-in-out;
+
+    .quote-stripe {
+      background: linear-gradient(135deg, rgba(31, 64, 43, 0.05) 0%, rgba(217, 119, 6, 0.08) 100%);
     }
-    @keyframes ripple {
-      0%, 100% { transform: scale(1); opacity: 0.4; }
-      50% { transform: scale(1.08); opacity: 0.7; }
+
+    /* Pulse effect on playing audio */
+    .narrating-pulse {
+      animation: narrateGlow 2s infinite ease-in-out;
     }
-    .floating-medhak {
-      animation: floatFrog 4s infinite ease-in-out;
+    @keyframes narrateGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+      50% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
     }
-    @keyframes floatFrog {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-6px) rotate(1.5deg); }
-    }
-    /* Milk pour wave animation */
-    .milk-flow {
-      stroke-dasharray: 10, 6;
-      animation: pourAnim 1.8s linear infinite;
-    }
-    @keyframes pourAnim {
-      to {
-        stroke-dashoffset: -32;
+
+    /* Print / PDF view enhancements */
+    @media print {
+      header, footer, #audioBtn, #imgUploadWrap, #langToggleBar {
+        display: none !important;
+      }
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .page-break {
+        page-break-before: always;
       }
     }
   </style>
 </head>
 
-<body class="bg-creme-50 text-slate-800 font-sans min-h-screen selection:bg-pond-600 selection:text-white">
-  <header class="sticky top-0 z-50 glass-card border-b border-creme-200 shadow-sm transition-all duration-300">
+<body class="editorial-bg text-slate-800 font-sans min-h-screen selection:bg-forest-800 selection:text-white flex flex-col justify-between">
+
+  <header class="sticky top-0 z-40 glass-nav border-b border-cream-300 shadow-sm transition-all duration-300">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
-      <!-- Brand / Author Byline -->
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-pond-800 to-pond-600 flex items-center justify-center text-white shadow-md shadow-pond-900/10 group-hover:scale-105 transition-transform">
-          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
+      <!-- Brand & Author -->
+      <a href="#" class="flex items-center gap-3.5 group">
+        <div class="w-11 h-11 rounded-2xl bg-forest-800 flex items-center justify-center text-amberMilk-400 font-serif font-bold text-xl shadow-md shadow-forest-900/10 group-hover:scale-105 transition-transform">
+          M
         </div>
         <div>
-          <span class="block text-xs uppercase tracking-widest font-semibold text-pond-800 font-sans">Economics & Fable</span>
-          <h1 class="text-lg font-bold text-slate-900 leading-tight">The Medhak Theory</h1>
+          <span class="block text-[11px] uppercase tracking-widest font-semibold text-forest-700">Economic & Life Fable</span>
+          <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">The Medhak Theory</h1>
         </div>
       </a>
 
-      <!-- Navigation & Language Switcher -->
-      <div class="flex items-center gap-3 sm:gap-6">
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
-          <a href="#fable" class="hover:text-pond-800 transition-colors" data-en="The Fable" data-hi="कथा">The Fable</a>
-          <a href="#principles" class="hover:text-pond-800 transition-colors" data-en="The 3 Laws" data-hi="तीन नियम">The 3 Laws</a>
-          <a href="#actions" class="hover:text-pond-800 transition-colors" data-en="Directives" data-hi="व्यावहारिक सीख">Directives</a>
-        </nav>
+      <!-- Controls: Audio Reader + Instant Language Switcher -->
+      <div class="flex items-center gap-2.5 sm:gap-4">
+        
+        <!-- Speech Narrator Button -->
+        <button id="narrateBtn" onclick="toggleSpeech()" class="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-cream-200 hover:bg-cream-300 border border-cream-300 text-forest-900 text-xs sm:text-sm font-semibold transition-all">
+          <svg id="audioIcon" class="w-4 h-4 text-forest-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+          </svg>
+          <span id="audioBtnText">Listen</span>
+        </button>
 
-        <!-- Toggle Button -->
-        <div class="inline-flex p-1 rounded-xl bg-creme-200/80 border border-creme-300">
-          <button id="langEnBtn" onclick="switchLanguage('en')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-pond-900 shadow-sm">
+        <!-- Bilingual Switcher Tabs -->
+        <div id="langToggleBar" class="inline-flex p-1 rounded-xl bg-cream-300/80 border border-cream-400/60 shadow-inner">
+          <button id="btnEn" onclick="setLanguage('en')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 bg-white text-forest-900 shadow-sm">
             English
           </button>
-          <button id="langHiBtn" onclick="switchLanguage('hi')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900">
-            हिंदी (Hindi)
+          <button id="btnHi" onclick="setLanguage('hi')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 text-slate-600 hover:text-slate-900">
+            हिंदी
           </button>
         </div>
+
       </div>
     </div>
   </header>
 
-  <section class="relative overflow-hidden py-16 sm:py-24 border-b border-creme-200 lily-pattern">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-      
-    
-
-      <!-- Main Headline -->
-      <h2 id="heroTitle" class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight sm:leading-tight mb-6">
-        Why Discarded Surplus Becomes <br class="hidden sm:inline" />
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-pond-800 via-pond-600 to-amber-600">Someone Else’s Leverage</span>
-      </h2>
-
-      <!-- Subtitle -->
-      <p id="heroSubtitle" class="max-w-3xl mx-auto text-base sm:text-xl text-slate-600 font-light leading-relaxed mb-8">
-        Every economic failure begins not during famine, but during harvest. When resources are abundant, unmonitored waste is ignored—until the day the balance of power permanently flips.
-      </p>
-
-      <!-- Quick Action Buttons -->
-      <div class="flex flex-wrap items-center justify-center gap-4">
-        <a href="#fable" class="px-6 py-3 rounded-xl bg-pond-800 text-white font-semibold text-sm shadow-lg shadow-pond-900/20 hover:bg-pond-900 hover:shadow-xl transition-all">
-          <span id="readFableBtn">Read the Fable</span> ↓
-        </a>
-        <a href="#principles" class="px-6 py-3 rounded-xl bg-white border border-creme-300 text-slate-800 font-semibold text-sm hover:bg-creme-100 transition-all">
-          <span id="viewTheoryBtn">Explore Core Principles</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="fable" class="py-16 sm:py-24 bg-white border-b border-creme-200">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Story Container Card -->
-      <div class="rounded-3xl bg-creme-50 border border-creme-200 overflow-hidden shadow-xl">
+  <main class="flex-grow">
+    <section class="pt-12 sm:pt-16 pb-8 border-b border-cream-200">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
-        <!-- Interactive Vector Graphic / Illustration of the Milkman, Pond, and Medhak -->
-        <div class="w-full bg-gradient-to-b from-sky-100 via-pond-50 to-pond-100 p-6 sm:p-10 relative overflow-hidden border-b border-creme-200">
-          <div class="absolute -right-16 -top-16 w-64 h-64 bg-amberAccent-400/20 rounded-full blur-3xl pointer-events-none"></div>
-          
-          <div class="relative max-w-3xl mx-auto">
-            <!-- Custom Stylized SVG Scene -->
-            <svg viewBox="0 0 800 420" class="w-full h-auto drop-shadow-md select-none rounded-2xl bg-white/70 backdrop-blur-sm border border-white/60 p-2 sm:p-4" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#BAE6FD"/>
-                  <stop offset="70%" stop-color="#E0F2FE"/>
-                  <stop offset="100%" stop-color="#FDFBF7"/>
-                </linearGradient>
-                <linearGradient id="pondGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#0284C7" stop-opacity="0.3"/>
-                  <stop offset="50%" stop-color="#059669" stop-opacity="0.5"/>
-                  <stop offset="100%" stop-color="#065F46" stop-opacity="0.8"/>
-                </linearGradient>
-                <linearGradient id="milkCanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#E2E8F0"/>
-                  <stop offset="50%" stop-color="#CBD5E1"/>
-                  <stop offset="100%" stop-color="#94A3B8"/>
-                </linearGradient>
-              </defs>
+        
 
-              <!-- Horizon & Rolling Hills -->
-              <path d="M0 240 Q 200 200, 450 230 T 800 220 L 800 420 L 0 420 Z" fill="#D1FAE5" />
-              <path d="M0 260 Q 300 230, 520 270 T 800 250 L 800 420 L 0 420 Z" fill="#A7F3D0" />
+        <!-- Main Title & Subtitle -->
+        <h2 id="mainTitle" class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight sm:leading-tight mb-5 font-serif">
+          Why Discarded Surplus Becomes <br class="hidden sm:inline" />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-forest-800 via-forest-700 to-amberMilk-600">
+            Someone Else’s Leverage
+          </span>
+        </h2>
 
-              <!-- Sun in Distance -->
-              <circle cx="210" cy="140" r="45" fill="#FEF08A" opacity="0.8" />
-              <circle cx="210" cy="140" r="60" fill="#FEF08A" opacity="0.3" class="water-ripple" />
-
-              <!-- Serene Pond Waters -->
-              <ellipse cx="490" cy="330" rx="270" ry="85" fill="url(#pondGrad)" />
-              <ellipse cx="490" cy="330" rx="245" ry="70" fill="none" stroke="#67E8F9" stroke-width="2" opacity="0.4" />
-              
-              <!-- Milkman on the Bank -->
-              <g transform="translate(140, 160)">
-                <!-- Body / Garments -->
-                <path d="M 60 140 Q 80 100, 110 95 Q 140 100, 155 140 L 170 210 L 40 210 Z" fill="#3B82F6" opacity="0.9"/>
-                <!-- Head & Turban/Cap -->
-                <circle cx="105" cy="65" r="26" fill="#FCD34D" />
-                <path d="M 80 62 Q 105 35, 132 55 Q 135 70, 80 62 Z" fill="#FFFFFF" />
-                <circle cx="114" cy="65" r="3" fill="#1E293B" />
-                <!-- Cheerful smile -->
-                <path d="M 108 76 Q 118 84, 126 75" stroke="#1E293B" stroke-width="2" fill="none" stroke-linecap="round" />
-                
-                <!-- Arms holding tilted can -->
-                <path d="M 130 115 L 180 140" stroke="#FCD34D" stroke-width="12" stroke-linecap="round" />
-                
-                <!-- Milk Can (Tilted Pouring) -->
-                <g transform="translate(170, 110) rotate(42)">
-                  <rect x="0" y="0" width="46" height="70" rx="8" fill="url(#milkCanGrad)" stroke="#64748B" stroke-width="2" />
-                  <ellipse cx="23" cy="5" rx="22" ry="7" fill="#E2E8F0" stroke="#64748B" stroke-width="1.5" />
-                  <path d="M -5 18 L -5 50" stroke="#64748B" stroke-width="4" stroke-linecap="round" fill="none" />
-                </g>
-              </g>
-
-              <!-- Stream of Poured Milk into Pond -->
-              <path d="M 285 240 Q 340 280, 420 325" fill="none" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.15))" />
-              <path d="M 285 240 Q 340 280, 420 325" fill="none" stroke="#FEF9C3" stroke-width="4" stroke-linecap="round" class="milk-flow" />
-              <!-- Milk Splash in Pond -->
-              <ellipse cx="425" cy="328" rx="22" ry="8" fill="#FFFFFF" opacity="0.9" />
-              <circle cx="435" cy="318" r="3" fill="#FFFFFF" />
-              <circle cx="415" cy="322" r="2.5" fill="#FFFFFF" />
-
-              <!-- Lily Pads in Water -->
-              <ellipse cx="610" cy="325" rx="55" ry="22" fill="#047857" />
-              <path d="M 610 325 L 665 320" stroke="#064E3B" stroke-width="2" />
-
-              <!-- The Medhak (Frog) Sitting Gladly on Lily Pad -->
-              <g transform="translate(580, 270)" class="floating-medhak">
-                <!-- Frog Body -->
-                <ellipse cx="30" cy="40" rx="28" ry="20" fill="#22C55E" stroke="#15803D" stroke-width="2" />
-                <ellipse cx="30" cy="42" rx="19" ry="13" fill="#BBF7D0" />
-                <!-- Eyes -->
-                <circle cx="18" cy="22" r="9" fill="#22C55E" stroke="#15803D" stroke-width="1.5" />
-                <circle cx="42" cy="22" r="9" fill="#22C55E" stroke="#15803D" stroke-width="1.5" />
-                <circle cx="19" cy="22" r="4.5" fill="#0F172A" />
-                <circle cx="41" cy="22" r="4.5" fill="#0F172A" />
-                <circle cx="21" cy="20" r="1.5" fill="#FFFFFF" />
-                <circle cx="43" cy="20" r="1.5" fill="#FFFFFF" />
-                <!-- Smile / Cheek -->
-                <path d="M 22 36 Q 30 44, 38 36" fill="none" stroke="#15803D" stroke-width="2.5" stroke-linecap="round" />
-                <!-- Frog Arms / Legs -->
-                <path d="M 8 46 Q -2 55, 12 55" fill="none" stroke="#15803D" stroke-width="3" stroke-linecap="round" />
-                <path d="M 52 46 Q 62 55, 48 55" fill="none" stroke="#15803D" stroke-width="3" stroke-linecap="round" />
-                <!-- Little Crown / Indicator of Quiet Accumulation -->
-                <path d="M 24 12 L 27 6 L 30 11 L 33 6 L 36 12 Z" fill="#F59E0B" />
-              </g>
-
-              <!-- Water lilies flower -->
-              <circle cx="680" cy="350" r="8" fill="#F472B6" />
-              <circle cx="680" cy="350" r="3" fill="#FDE047" />
-
-              <!-- Labels inside illustration -->
-              <rect x="520" y="380" width="220" height="28" rx="6" fill="#064E3B" opacity="0.85" />
-              <text x="630" y="398" fill="#FFFFFF" font-size="11" font-family="Inter, sans-serif" font-weight="600" text-anchor="middle">THE MEDHAK's RESERVE</text>
-
-              <rect x="70" y="380" width="210" height="28" rx="6" fill="#1E3A8A" opacity="0.85" />
-              <text x="175" y="398" fill="#FFFFFF" font-size="11" font-family="Inter, sans-serif" font-weight="600" text-anchor="middle">DISCARDED DAILY SURPLUS</text>
-            </svg>
-
-            <div class="mt-4 flex flex-wrap items-center justify-between text-xs text-slate-500 px-1">
-              <span>Scene: The milkman casually pouring unsold milk into the pond.</span>
-              <span class="font-medium text-pond-800">Concept & Narrative by Sunil Gupta</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Story Content (Switchable via JS) -->
-        <div class="p-6 sm:p-12">
-          
-          <!-- English Story Version -->
-          <div id="storyEnglish" class="prose prose-slate max-w-none">
-            <div class="flex items-center gap-3 mb-6">
-              <span class="w-8 h-1 bg-pond-600 rounded-full"></span>
-              <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 font-serif">The Fable of the Milkman and the Pond</h3>
-            </div>
-
-            <p class="text-lg leading-relaxed text-slate-700">
-              In a thriving village, an energetic milkman started every morning with buckets filled with pure, fresh milk. His deliveries were reliable, his customers were generous, and each day brought enough income to comfortably cover his life and family expenses.
-            </p>
-
-            <p class="text-lg leading-relaxed text-slate-700">
-              Yet, at the end of every afternoon, a small measure of milk remained at the bottom of his cans. Because his stomach was full and his pockets were lined with coin, he treated this surplus as trivial. Rather than chilling it, turning it into butter, or offering it at a lower cost, he chose effortless convenience: <strong>he emptied the leftovers into a quiet pond.</strong>
-            </p>
-
-            <div class="my-6 p-5 rounded-2xl bg-amber-50/70 border-l-4 border-amber-500 text-slate-700 italic">
-              "Inside that pond lived a quiet frog—a Medhak. Day after day, year after year, while the milkman looked away, the frog gathered every drop with patient discipline."
-            </div>
-
-            <p class="text-lg leading-relaxed text-slate-700">
-              Then came an unexpected, relentless drought. Pastures withered, cattle fell sick, and milk production completely dried up. For the first time in his life, the milkman had zero revenue and zero inventory. Facing financial ruin, he rushed to the pond, remembering the oceans of milk he had poured into it over the years.
-            </p>
-
-            <p class="text-lg leading-relaxed text-slate-700">
-              "Friend!" the milkman pleaded, "I fed this pond for years without charging you a single coin. Now I have nothing. Share some of that milk so I can survive!"
-            </p>
-
-            <!-- Dialogue Highlight -->
-            <div class="my-6 p-6 rounded-2xl bg-pond-900 text-white shadow-inner">
-              <p class="text-xs uppercase tracking-widest text-emerald-400 font-semibold mb-2">The Frog's Reply</p>
-              <p class="text-lg sm:text-xl font-serif leading-snug">
-                "Boss, whatever you had, you sold, earned, and enjoyed. What remained, you threw away because you thought it had no value. It was I who harvested your waste through discipline. It is now my asset, and I owe you nothing."
-              </p>
-            </div>
-
-            <p class="text-lg leading-relaxed text-slate-700 font-medium">
-              The milkman walked away empty-handed, finally recognizing the brutal truth: <em>the surplus you discard today is the leverage you surrender tomorrow.</em>
-            </p>
-          </div>
-
-          <!-- Hindi Story Version (Hidden by default, toggled via JS) -->
-          <div id="storyHindi" class="hidden prose prose-slate max-w-none font-devanagari">
-            <div class="flex items-center gap-3 mb-6">
-              <span class="w-8 h-1 bg-pond-600 rounded-full"></span>
-              <h3 class="text-2xl sm:text-3xl font-bold text-slate-900">दूधवाले और तालाब की कथा</h3>
-            </div>
-
-            <p class="text-lg leading-relaxed text-slate-700">
-              एक संपन्न गांव में एक मेहनती दूधवाला रोज़ सुबह काम शुरू करता था। उसकी गायें भरपूर दूध देती थीं और वह हर सुबह पूरे गांव में ताज़ा, गाढ़ा दूध बांटता था। उसकी बिक्री बढ़िया थी, ग्राहक खुश थे और रोज़ की कमाई से उसके घर का ख़र्च बहुत आराम से निकल जाता था।
-            </p>
-
-            <p class="text-lg leading-relaxed text-slate-700">
-              लेकिन हर फेरे के बाद, उसकी बाल्टियों के तली में थोड़ा दूध हमेशा बच जाता था। चूँकि उसकी रोज़मर्रा की ज़रूरतें पूरी हो चुकी थीं, इसलिए वह इस बचे हुए दूध को बेमायने समझता था। इसे सहेजने, इसका मक्खन-पनीर बनाने या कम दाम पर किसी ज़रूरतमंद को देने के बजाय उसने सबसे आसान रास्ता चुना: <strong>वह उस बचे हुए दूध को गांव के एक शांत तालाब में बहा देता था।</strong>
-            </p>
-
-            <div class="my-6 p-5 rounded-2xl bg-amber-50/70 border-l-4 border-amber-500 text-slate-700 italic">
-              "उसी तालाब के किनारे एक चतुर मेंढक रहता था। दिन बीतते गए, साल बीतते गए। दूधवाला हर रोज़ अपनी अतिरिक्त बचत उस तालाब में डालता रहा, और वह मेंढक हर रोज़ उस दूध की एक-एक बूंद को सहेजता गया।"
-            </div>
-
-            <p class="text-lg leading-relaxed text-slate-700">
-              फिर एक साल अचानक भीषण सूखा पड़ा। चारागाह सूख गए, मवेशी कमज़ोर हो गए और दूध का उत्पादन ठप हो गया। अपने जीवन में पहली बार, दूधवाले के पास बेचने के लिए एक घूंट दूध भी नहीं बचा। बिना कमाई और ख़ाली बाल्टियों के साथ वह भुखमरी की कगार पर आ खड़ा हुआ।
-            </p>
-
-            <p class="text-lg leading-relaxed text-slate-700">
-              हताशा में वह उसी तालाब के किनारे पहुंचा। उसने मेंढक को आवाज़ दी, "दोस्त! मैंने सालों तक बिना एक पैसे की उम्मीद के इस तालाब में दूध बहाया। आज मेरा परिवार भूखा मर रहा है, और मेरे पास कुछ नहीं है। क्या तुम मुझे थोड़ा दूध दे सकते हो ताकि मैं ज़िंदा रह सकूं?"
-            </p>
-
-            <!-- Dialogue Highlight -->
-            <div class="my-6 p-6 rounded-2xl bg-pond-900 text-white shadow-inner">
-              <p class="text-xs uppercase tracking-widest text-emerald-400 font-semibold mb-2">मेंढक का जवाब</p>
-              <p class="text-lg sm:text-xl leading-relaxed">
-                "मालिक! जो तुम्हारे पास था, तुमने बेचा, पैसे कमाए, और मौज की। और जो बच गया, उसे तुमने यह सोचकर फेंक दिया कि उसकी कोई क़ीमत नहीं है। तुमने जिसे कचरा समझकर फेंका, मैंने अपने संयम और अनुशासन से उसे अपनी पूंजी बना लिया। अब इस पर तुम्हारा कोई हक़ नहीं है। मुझ पर तुम्हारा कोई कर्ज़ नहीं बनता।"
-              </p>
-            </div>
-
-            <p class="text-lg leading-relaxed text-slate-700 font-medium">
-              दूधवाला ख़ाली हाथ लौट गया—उसे उस दिन समझ आया कि अच्छे वक्त में अपनी बची हुई पूंजी की उपेक्षा करने की असली क़ीमत बुरे वक्त में क्या चुकानी पड़ती है।
-            </p>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="principles" class="py-16 sm:py-24 bg-creme-100/60 border-b border-creme-200">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs uppercase font-bold tracking-widest text-pond-800 bg-pond-50 px-3 py-1 rounded-full border border-pond-600/30">Theoretical Framework</span>
-        <h3 id="principlesTitle" class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
-          The Three Laws of The Medhak Theory
-        </h3>
-        <p id="principlesSubtitle" class="text-slate-600 mt-3 text-base sm:text-lg">
-          Formulated by Sunil Gupta to diagnose why individuals and businesses surrender competitive leverage during periods of stability.
+        <p id="mainSubtitle" class="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+          Every economic mistake begins not during famine, but during harvest. When times are good, waste is rationalized as a minor luxury—until the balance of power flips.
         </p>
-      </div>
 
-      <!-- Principles Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        <!-- Law 1 Card -->
-        <div class="rounded-3xl bg-white border border-creme-200 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-lg mb-6">
-              01
-            </div>
-            <h4 id="card1Title" class="text-xl font-bold text-slate-900 mb-3">
-              The Fallacy of the Disposable Surplus
-            </h4>
-            <p id="card1Text" class="text-slate-600 leading-relaxed text-sm sm:text-base">
-              When basic survival needs are met, people instinctively treat remaining margins as worthless trash. Surplus is mistakenly viewed as "optional" rather than the essential buffer required to survive cyclical downturns.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-amber-700 flex items-center gap-1">
-            <span id="card1Tag">Trap: Lifestyle inflation & margin neglect</span>
-          </div>
-        </div>
-
-        <!-- Law 2 Card -->
-        <div class="rounded-3xl bg-white border border-creme-200 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-pond-100 text-pond-800 flex items-center justify-center font-bold text-lg mb-6">
-              02
-            </div>
-            <h4 id="card2Title" class="text-xl font-bold text-slate-900 mb-3">
-              The Law of Asymmetric Transfer
-            </h4>
-            <p id="card2Text" class="text-slate-600 leading-relaxed text-sm sm:text-base">
-              Value discarded by one party does not vanish into thin air; it is collected by an observant counterparty (the Medhak). Inefficiencies and neglected small gains quietly fund the future dominance of your rivals.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-pond-700 flex items-center gap-1">
-            <span id="card2Tag">Reality: Waste turns into someone else's asset</span>
-          </div>
-        </div>
-
-        <!-- Law 3 Card -->
-        <div class="rounded-3xl bg-white border border-creme-200 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-800 flex items-center justify-center font-bold text-lg mb-6">
-              03
-            </div>
-            <h4 id="card3Title" class="text-xl font-bold text-slate-900 mb-3">
-              Forfeiture of Leverage
-            </h4>
-            <p id="card3Text" class="text-slate-600 leading-relaxed text-sm sm:text-base">
-              Abandoning excess creates zero goodwill and zero moral equity. The moment you discard a resource rather than managing it, you permanently forfeit all future rights, leverage, and claims over it.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-700 flex items-center gap-1">
-            <span id="card3Tag">Consequence: Scrap yields zero loyalty</span>
-          </div>
+        <!-- Quick Content Jump Tabs -->
+        <div class="flex items-center justify-center gap-3 mt-8 text-xs sm:text-sm font-medium">
+          <a href="#story-section" class="px-5 py-2.5 rounded-xl bg-forest-800 hover:bg-forest-900 text-white shadow-md shadow-forest-900/15 transition-all">
+            <span id="tabStoryLabel">The Story & Illustration</span>
+          </a>
+          <a href="#theory-section" class="px-5 py-2.5 rounded-xl bg-white border border-cream-300 text-slate-700 hover:bg-cream-100 transition-all">
+            <span id="tabTheoryLabel">The 3 Principles</span>
+          </a>
         </div>
 
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="actions" class="py-16 sm:py-24 bg-white border-b border-creme-200">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="story-section" class="py-10 sm:py-14 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="rounded-3xl bg-gradient-to-br from-pond-950 to-pond-900 text-white p-8 sm:p-14 shadow-2xl relative overflow-hidden">
-        <div class="absolute right-0 bottom-0 w-80 h-80 bg-pond-600/10 rounded-full blur-3xl pointer-events-none"></div>
+      <!-- Story Illustration Container with Zoom Effect -->
+      <div class="bg-white rounded-3xl p-3 sm:p-5 border border-cream-300 shadow-xl overflow-hidden mb-12">
+        
+        <div class="relative group cursor-pointer overflow-hidden rounded-2xl bg-cream-100" onclick="openLightbox()">
+          <!-- Story Illustration Image -->
+          <img 
+            id="storyIllustrationImg" 
+            src="39310.jpg" 
+            alt="The Milkman and the Medhak at the Pond" 
+            class="w-full h-auto max-h-[580px] object-contain mx-auto transition-transform duration-500 group-hover:scale-[1.01]"
+            onerror="handleImageFallback(this)"
+          />
 
+          <!-- Hover Overlay Hint -->
+          <div class="absolute inset-0 bg-forest-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-between p-4 sm:p-6 pointer-events-none">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/70 text-white text-xs backdrop-blur-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+              <span id="zoomHintText">Click to expand illustration</span>
+            </span>
+            <span class="text-xs text-white/90 font-medium bg-forest-900/80 px-3 py-1.5 rounded-lg backdrop-blur-sm">
+              Illustration for The Medhak Theory
+            </span>
+          </div>
+        </div>
+
+        <!-- Image Utilities Bar: Caption + Local Image Switcher -->
+        <div class="mt-4 px-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+          <p id="illustrationCaption" class="text-center sm:text-left italic">
+            The cheerful milkman pours his daily surplus into the serene pond, where the Medhak gathers every drop.
+          </p>
+
+          <div class="flex items-center gap-2">
+            <label for="customImgInput" class="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cream-200 hover:bg-cream-300 text-slate-700 font-semibold transition-colors">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              <span id="customImgLabel">Change / Swap Image</span>
+            </label>
+            <input type="file" id="customImgInput" accept="image/*" class="hidden" onchange="uploadCustomImage(event)">
+          </div>
+        </div>
+
+      </div>
+
+      <article class="bg-white rounded-3xl border border-cream-300 p-6 sm:p-12 shadow-sm">
+        
+        <!-- ENGLISH FABLE CONTENT -->
+        <div id="englishStoryWrap" class="space-y-6 text-slate-700 leading-relaxed text-base sm:text-lg">
+          <div class="border-b border-cream-200 pb-5">
+            <span class="text-xs uppercase font-bold tracking-widest text-forest-700">The Fable</span>
+            <h3 class="text-2xl sm:text-4xl font-bold font-serif text-slate-900 mt-1">The Milkman and the Pond</h3>
+          </div>
+
+          <p>
+            In a prosperous village, a milkman started each day at dawn. His cows produced abundantly, and every morning he delivered rich, fresh milk to every household. His sales were strong, his customers were satisfied, and his day’s earnings comfortably paid for all his household expenses.
+          </p>
+
+          <p>
+            Yet, at the end of each route, a small portion of milk always remained at the bottom of his pails.
+          </p>
+
+          <p>
+            Because his daily needs were already met, the milkman viewed the leftover milk as irrelevant. Rather than storing, preserving, or selling it at a discount, he took the path of least resistance: <strong>he dumped the remaining milk into a quiet village pond.</strong>
+          </p>
+
+          <div class="my-6 p-6 rounded-2xl quote-stripe border-l-4 border-amberMilk-500">
+            <p class="font-serif italic text-slate-800 text-lg sm:text-xl">
+              "At the edge of that pond lived a quiet green frog—a Medhak. Day after day, year after year, the milkman emptied his surplus into the water. And day after day, the frog gathered every drop, preserving and utilizing the discarded resource."
+            </p>
+          </div>
+
+          <p>
+            The milkman noticed the frog, but he paid it no mind. After all, he had already earned his profit; what did a little wasted milk matter?
+          </p>
+
+          <p>
+            Then came a year of severe drought. Pastures dried, cattle grew weak, and the supply of milk collapsed. For the first time in his life, the milkman had nothing to sell. With no income and empty pails, he stood on the brink of ruin.
+          </p>
+
+          <p>
+            In desperation, he walked to the edge of the pond. He remembered the years of milk he had poured into the water and called out to the frog:
+          </p>
+
+          <!-- Dialogue Box -->
+          <div class="my-6 p-6 sm:p-8 rounded-2xl bg-forest-950 text-white shadow-lg space-y-4">
+            <div class="border-b border-white/10 pb-3">
+              <span class="text-xs uppercase tracking-widest text-amberMilk-400 font-bold">The Milkman's Plea</span>
+              <p class="text-base sm:text-lg italic text-slate-200 mt-1">
+                "Friend, I poured milk into this pond for years without asking for a single coin. Now my family is starving, and I have nothing. Can you spare some of the milk so I can survive?"
+              </p>
+            </div>
+            
+            <div>
+              <span class="text-xs uppercase tracking-widest text-leaf-500 font-bold">The Medhak's Verdict</span>
+              <p class="text-lg sm:text-xl font-serif text-white mt-1 leading-snug">
+                "Boss, whatever you had, you sold. You earned your money, you lived comfortably, and you discarded the rest because you thought it had no value. I took what you threw away and made it mine through effort and discipline. It is no longer yours to claim. I owe you nothing."
+              </p>
+            </div>
+          </div>
+
+          <p class="font-medium text-slate-900 text-lg">
+            The milkman walked away empty-handed, finally understanding the cost of unmanaged surplus.
+          </p>
+        </div>
+
+        <!-- HINDI FABLE CONTENT -->
+        <div id="hindiStoryWrap" class="hidden space-y-6 text-slate-700 leading-relaxed text-base sm:text-lg font-devanagari">
+          <div class="border-b border-cream-200 pb-5">
+            <span class="text-xs uppercase font-bold tracking-widest text-forest-700">कथा</span>
+            <h3 class="text-2xl sm:text-4xl font-bold font-hindiTitle text-slate-900 mt-1">दूधवाले और तालाब की कथा</h3>
+          </div>
+
+          <p>
+            एक संपन्न गांव में एक दूधवाला रोज़ सुबह तड़के काम शुरू करता था। उसकी गायें भरपूर दूध देती थीं, और वह हर सुबह पूरे गांव में ताज़ा, गाढ़ा दूध बांटता था। उसकी बिक्री बढ़िया थी, ग्राहक खुश थे, और रोज़ की कमाई से उसके घर का ख़र्च बहुत आराम से निकल जाता था।
+          </p>
+
+          <p>
+            लेकिन हर फेरे के बाद, उसकी बाल्टियों के तली में थोड़ा दूध हमेशा बच जाता था।
+          </p>
+
+          <p>
+            चूँकि उसकी रोज़मर्रा की ज़रूरतें पूरी हो चुकी थीं, इसलिए वह इस बचे हुए दूध को बेमायने समझता था। इसे सहेजने, इसका कुछ और बनाने या कम दाम पर बेचने के बजाय उसने सबसे आसान रास्ता चुना: <strong>वह उस बचे हुए दूध को गांव के एक शांत तालाब में बहा देता था।</strong>
+          </p>
+
+          <div class="my-6 p-6 rounded-2xl quote-stripe border-l-4 border-amberMilk-500">
+            <p class="italic text-slate-800 text-lg sm:text-xl">
+              "उसी तालाब के किनारे एक शांत हरा मेंढक रहता था। दिन बीतते गए, साल बीतते गए। दूधवाला हर रोज़ अपनी अतिरिक्त बचत उस तालाब में डालता रहा। और वह मेंढक हर रोज़ उस दूध की एक-एक बूंद को सहेजता गया, उसका सदुपयोग करता गया।"
+            </p>
+          </div>
+
+          <p>
+            दूधवाले ने यह देखा ज़रूर, मगर ध्यान नहीं दिया। आख़िरकार, उसने अपनी कमाई तो कर ही ली थी; ज़रा से गिरे दूध से क्या फ़र्क पड़ता था?
+          </p>
+
+          <p>
+            फिर एक साल भीषण सूखा पड़ा। चारागाह सूख गए, मवेशी कमज़ोर हो गए और दूध का उत्पादन ठप हो गया। अपने जीवन में पहली बार, दूधवाले के पास बेचने के लिए एक घूंट दूध भी नहीं बचा। बिना कमाई और ख़ाली बाल्टियों के साथ वह बर्बादी की कगार पर आ खड़ा हुआ।
+          </p>
+
+          <p>
+            हताशा में वह उसी तालाब के किनारे पहुंचा। उसे वे सारे साल याद आए जब उसने पानी में दूध बहाया था। उसने मेंढक को आवाज़ दी:
+          </p>
+
+          <!-- Hindi Dialogue Box -->
+          <div class="my-6 p-6 sm:p-8 rounded-2xl bg-forest-950 text-white shadow-lg space-y-4">
+            <div class="border-b border-white/10 pb-3">
+              <span class="text-xs uppercase tracking-widest text-amberMilk-400 font-bold">दूधवाले की गुहार</span>
+              <p class="text-base sm:text-lg italic text-slate-200 mt-1">
+                "दोस्त! मैंने सालों तक बिना एक पैसे की उम्मीद के इस तालाब में दूध बहाया। आज मेरा परिवार भूखा मर रहा है, और मेरे पास कुछ नहीं बचा। क्या तुम मुझे थोड़ा दूध दे सकते हो ताकि मैं ज़िंदा रह सकूं?"
+              </p>
+            </div>
+            
+            <div>
+              <span class="text-xs uppercase tracking-widest text-leaf-500 font-bold">मेंढक का साफ़ जवाब</span>
+              <p class="text-lg sm:text-xl text-white mt-1 leading-relaxed">
+                "मालिक! जो तुम्हारे पास था, तुमने बेचा। पैसे कमाए, ऐश की ज़िंदगी जी, और जो बच गया, उसे तुमने यह सोचकर फेंक दिया कि उसकी कोई क़ीमत नहीं है। तुमने जिसे कचरा समझकर फेंका, मैंने अपनी मेहनत और अनुशासन से उसे अपनी पूंजी बना लिया। अब इस पर तुम्हारा कोई हक़ नहीं है। मुझ पर तुम्हारा कोई कर्ज़ नहीं बनता।"
+              </p>
+            </div>
+          </div>
+
+          <p class="font-medium text-slate-900 text-lg">
+            दूधवाला ख़ाली हाथ लौट गया—उसे उस दिन समझ आया कि अपनी बची हुई पूंजी की उपेक्षा करने की असली क़ीमत क्या होती है।
+          </p>
+        </div>
+
+      </article>
+    </section>
+
+    <section id="theory-section" class="py-16 sm:py-24 bg-cream-200/50 border-t border-b border-cream-300">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs uppercase font-bold tracking-widest text-forest-700 bg-white px-3 py-1 rounded-full border border-cream-300 shadow-sm">
+            Core Principles
+          </span>
+          <h3 id="theoryHeadline" class="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900 mt-3 tracking-tight">
+            The Three Laws of The Medhak Theory
+          </h3>
+          <p id="theorySubheadline" class="text-slate-600 mt-3 text-base sm:text-lg">
+            A fundamental economic principle formulated by Sunil Gupta, applicable to personal wealth, startup operations, and enterprise resilience.
+          </p>
+        </div>
+
+        <!-- 3 Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Law 1 -->
+          <div class="bg-white rounded-3xl p-8 border border-cream-300 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-amberMilk-100 text-amberMilk-700 flex items-center justify-center font-bold text-lg mb-6">
+                01
+              </div>
+              <h4 id="law1Title" class="text-xl font-bold text-slate-900 mb-3">
+                The Fallacy of the Disposable Surplus
+              </h4>
+              <p id="law1Desc" class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                When core survival needs are met, people treat remaining margins as disposable. Surplus is rarely recognized as the seed capital required to survive the next cyclical downturn.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-cream-200 text-xs font-semibold text-amberMilk-700">
+              <span id="law1Tag">Lesson: Don't neglect the margins</span>
+            </div>
+          </div>
+
+          <!-- Law 2 -->
+          <div class="bg-white rounded-3xl p-8 border border-cream-300 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-forest-800/10 text-forest-800 flex items-center justify-center font-bold text-lg mb-6">
+                02
+              </div>
+              <h4 id="law2Title" class="text-xl font-bold text-slate-900 mb-3">
+                The Law of Asymmetric Transfer
+              </h4>
+              <p id="law2Desc" class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                Discarded value does not disappear; it transfers. Inefficiency, neglected client segments, and wasted capital are consistently harvested by competitors, intermediaries, or disciplined third parties (the Medhak).
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-cream-200 text-xs font-semibold text-forest-700">
+              <span id="law2Tag">Lesson: Waste builds someone else's asset</span>
+            </div>
+          </div>
+
+          <!-- Law 3 -->
+          <div class="bg-white rounded-3xl p-8 border border-cream-300 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-800 flex items-center justify-center font-bold text-lg mb-6">
+                03
+              </div>
+              <h4 id="law3Title" class="text-xl font-bold text-slate-900 mb-3">
+                Forfeiture of Leverage
+              </h4>
+              <p id="law3Desc" class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                You cannot claim equity in value you willingly abandoned. Abandoning excess capital or opportunities creates no goodwill, builds no reserves, and yields no social or economic return.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-cream-200 text-xs font-semibold text-slate-700">
+              <span id="law3Tag">Lesson: Discarded value yields zero equity</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-br from-forest-950 via-forest-900 to-forest-800 text-white rounded-3xl p-8 sm:p-14 shadow-2xl relative overflow-hidden">
+        
         <div class="relative z-10">
-          <span class="text-xs uppercase font-bold tracking-widest text-emerald-400">Implementation Guide</span>
-          <h3 id="directivesTitle" class="text-2xl sm:text-4xl font-bold text-white mt-2 mb-8">
-            How to Prevent the "Medhak Drain" in Daily Life
+          <span class="text-xs uppercase font-bold tracking-widest text-leaf-500">Actionable Directives</span>
+          <h3 id="directiveHeader" class="text-2xl sm:text-4xl font-bold font-serif text-white mt-2 mb-8">
+            How to Plug the "Medhak Drain" Today
           </h3>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             
-            <div class="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-              <div class="text-emerald-400 text-2xl font-bold mb-2">01</div>
-              <h5 id="dir1Head" class="font-bold text-lg text-white mb-2">Automate Retention</h5>
-              <p id="dir1Desc" class="text-sm text-slate-300 leading-relaxed">
-                Save and invest the moment earnings arrive. Never count on saving "whatever is left" at the end of the month, because leftovers invariably get wasted.
+            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div class="text-amberMilk-400 font-bold text-xl mb-2">01</div>
+              <h5 id="dirTitle1" class="font-bold text-lg text-white mb-2">Automate Retention</h5>
+              <p id="dirText1" class="text-sm text-slate-300 leading-relaxed">
+                Do not rely on saving what is left over at the end of the cycle. Capture margins at the source through automated investments, debt reduction, or dedicated reserve funds.
               </p>
             </div>
 
-            <div class="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-              <div class="text-emerald-400 text-2xl font-bold mb-2">02</div>
-              <h5 id="dir2Head" class="font-bold text-lg text-white mb-2">Plug Micro-Leaks</h5>
-              <p id="dir2Desc" class="text-sm text-slate-300 leading-relaxed">
-                Audit idle software subscriptions, unmonitored small daily expenses, and inventory spoilage. Over ten years, these drips equal a full enterprise reserve.
+            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div class="text-amberMilk-400 font-bold text-xl mb-2">02</div>
+              <h5 id="dirTitle2" class="font-bold text-lg text-white mb-2">Audit Operational Leakage</h5>
+              <p id="dirText2" class="text-sm text-slate-300 leading-relaxed">
+                Regularly evaluate recurring waste—idle subscriptions, unoptimized logistics, and unmonitored minor expenses. Compounded over years, these leaks equal a full reserve.
               </p>
             </div>
 
-            <div class="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-              <div class="text-emerald-400 text-2xl font-bold mb-2">03</div>
-              <h5 id="dir3Head" class="font-bold text-lg text-white mb-2">Respect Every Margin</h5>
-              <p id="dir3Desc" class="text-sm text-slate-300 leading-relaxed">
-                Lasting independence is not defined solely by how high your peak income was, but by the discipline you exercised over the margins everyone else overlooked.
+            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div class="text-amberMilk-400 font-bold text-xl mb-2">03</div>
+              <h5 id="dirTitle3" class="font-bold text-lg text-white mb-2">Treat Every Margin as Capital</h5>
+              <p id="dirText3" class="text-sm text-slate-300 leading-relaxed">
+                Security is built not merely by the top-line income generated during peaks, but by the discipline maintained over the fractions that remain.
               </p>
             </div>
 
           </div>
 
-          <!-- Share or Copy Box -->
-          <div class="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="text-sm text-slate-300">
-              <span class="font-medium text-white">The Medhak Theory</span> by Sunil Gupta
+          <!-- Printable & Share Action -->
+          <div class="mt-10 pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+            <div class="text-xs sm:text-sm text-slate-300">
+              <span id="creditNote">Authored by Sunil Gupta</span> • The Medhak Theory
             </div>
-            <button onclick="copyFrameworkQuote()" id="shareBtn" class="px-5 py-2.5 rounded-xl bg-pond-600 hover:bg-pond-500 text-white text-xs font-semibold uppercase tracking-wider transition-all flex items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-              <span>Copy Core Summary</span>
-            </button>
+            <div class="flex items-center gap-3">
+              <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4H7v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                <span id="printBtnText">Print / Save PDF</span>
+              </button>
+              <button onclick="copySummary()" class="px-4 py-2 rounded-xl bg-leaf-600 hover:bg-leaf-500 text-white text-xs font-semibold transition-colors flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                <span id="copyBtnText">Copy Summary</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl bg-white border border-cream-300 p-8 sm:p-10 shadow-sm flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
+        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-forest-800 to-leaf-600 flex items-center justify-center text-white text-3xl font-serif font-bold shadow-md shrink-0">
+          SG
+        </div>
+        <div class="text-center sm:text-left">
+          <span class="text-xs uppercase font-bold tracking-widest text-forest-700">About the Author</span>
+          <h4 class="text-2xl font-bold font-serif text-slate-900 mt-1">Sunil Gupta</h4>
+          <p id="authorBio" class="text-slate-600 mt-2 text-sm sm:text-base leading-relaxed">
+            Sunil Gupta formulated <strong>The Medhak Theory</strong> as a vivid behavioral and economic framework. It explores how unmanaged prosperity turns into systemic vulnerability, and why disciplined preservation is the true foundation of long-term independence.
+          </p>
+          <div class="mt-4 text-xs text-slate-400 font-medium">
+            © 2026 Sunil Gupta. All rights reserved.
           </div>
         </div>
       </div>
+    </section>
+  </main>
 
+  <div id="imageLightbox" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4" onclick="closeLightbox()">
+    <button class="absolute top-6 right-6 text-white/80 hover:text-white text-3xl font-bold p-2 focus:outline-none" onclick="closeLightbox()">
+      ✕
+    </button>
+    <div class="max-w-4xl max-h-[90vh] overflow-hidden rounded-2xl" onclick="event.stopPropagation()">
+      <img id="lightboxImg" src="39310.jpg" alt="Enlarged Illustration" class="w-full h-auto object-contain max-h-[85vh] rounded-2xl">
+      <p class="text-center text-white/70 text-xs mt-3">The Medhak Theory • Sunil Gupta</p>
     </div>
-  </section>
+  </div>
 
-  <footer class="py-12 bg-creme-50 text-slate-600 text-sm">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center gap-4">
-      <div class="w-8 h-8 rounded-full bg-pond-800 text-white flex items-center justify-center font-bold text-xs shadow-sm">
-        SG
-      </div>
-      <p class="font-medium text-slate-800">
-        Conceptualized and Authored by <strong class="text-slate-900">Sunil Gupta</strong>
-      </p>
-      <p class="text-xs text-slate-500 max-w-lg leading-relaxed">
-        An operational and financial framework illustrating the hidden danger of discarded surplus and asymmetric capital transfer. All rights reserved.
-      </p>
-      <div class="text-xs text-slate-400 mt-2">
-        © 2026 Sunil Gupta. Authored for thinkers, entrepreneurs, and families.
-      </div>
+  <footer class="py-8 bg-cream-200 border-t border-cream-300 text-center text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="font-medium text-slate-700">The Medhak Theory by Sunil Gupta</p>
+      <p class="mt-1 text-slate-400">© 2026 Sunil Gupta. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Notification Toast for Copying -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl border border-slate-700 text-sm transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3">
-    <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl border border-slate-700 text-sm transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2.5">
+    <svg class="w-5 h-5 text-leaf-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
     <span id="toastMsg">Summary copied to clipboard!</span>
   </div>
 
   <script>
-    // Bilingual Text Data Store
-    const translations = {
+    // Bilingual Text Repository
+    const content = {
       en: {
-        heroBadge: "Original Theory & Thought by Sunil Gupta",
-        heroTitle: `Why Discarded Surplus Becomes <br class="hidden sm:inline" /><span class="text-transparent bg-clip-text bg-gradient-to-r from-pond-800 via-pond-600 to-amber-600">Someone Else’s Leverage</span>`,
-        heroSubtitle: "Every economic failure begins not during famine, but during harvest. When resources are abundant, unmonitored waste is ignored—until the day the balance of power permanently flips.",
-        readFableBtn: "Read the Fable",
-        viewTheoryBtn: "Explore Core Principles",
-        principlesTitle: "The Three Laws of The Medhak Theory",
-        principlesSubtitle: "Formulated by Sunil Gupta to diagnose why individuals and businesses surrender competitive leverage during periods of stability.",
-        card1Title: "The Fallacy of the Disposable Surplus",
-        card1Text: "When basic survival needs are met, people instinctively treat remaining margins as worthless trash. Surplus is mistakenly viewed as 'optional' rather than the essential buffer required to survive cyclical downturns.",
-        card1Tag: "Trap: Lifestyle inflation & margin neglect",
-        card2Title: "The Law of Asymmetric Transfer",
-        card2Text: "Value discarded by one party does not vanish into thin air; it is collected by an observant counterparty (the Medhak). Inefficiencies and neglected small gains quietly fund the future dominance of your rivals.",
-        card2Tag: "Reality: Waste turns into someone else's asset",
-        card3Title: "Forfeiture of Leverage",
-        card3Text: "Abandoning excess creates zero goodwill and zero moral equity. The moment you discard a resource rather than managing it, you permanently forfeit all future rights, leverage, and claims over it.",
-        card3Tag: "Consequence: Scrap yields zero loyalty",
-        directivesTitle: "How to Prevent the 'Medhak Drain' in Daily Life",
-        dir1Head: "Automate Retention",
-        dir1Desc: "Save and invest the moment earnings arrive. Never count on saving 'whatever is left' at the end of the month, because leftovers invariably get wasted.",
-        dir2Head: "Plug Micro-Leaks",
-        dir2Desc: "Audit idle software subscriptions, unmonitored small daily expenses, and inventory spoilage. Over ten years, these drips equal a full enterprise reserve.",
-        dir3Head: "Respect Every Margin",
-        dir3Desc: "Lasting independence is not defined solely by how high your peak income was, but by the discipline you exercised over the margins everyone else overlooked.",
-        shareBtn: "Copy Core Summary",
-        toast: "Summary copied to clipboard!"
+        authorBadge: "Conceptualized & Authored by Sunil Gupta",
+        mainTitle: `Why Discarded Surplus Becomes <br class="hidden sm:inline" /><span class="text-transparent bg-clip-text bg-gradient-to-r from-forest-800 via-forest-700 to-amberMilk-600">Someone Else’s Leverage</span>`,
+        mainSubtitle: "Every economic mistake begins not during famine, but during harvest. When times are good, waste is rationalized as a minor luxury—until the balance of power flips.",
+        tabStoryLabel: "The Story & Illustration",
+        tabTheoryLabel: "The 3 Principles",
+        zoomHintText: "Click to expand illustration",
+        illustrationCaption: "The cheerful milkman pours his daily surplus into the serene pond, where the Medhak gathers every drop.",
+        customImgLabel: "Change / Swap Image",
+        theoryHeadline: "The Three Laws of The Medhak Theory",
+        theorySubheadline: "A fundamental economic principle formulated by Sunil Gupta, applicable to personal wealth, startup operations, and enterprise resilience.",
+        law1Title: "The Fallacy of the Disposable Surplus",
+        law1Desc: "When core survival needs are met, people treat remaining margins as disposable. Surplus is rarely recognized as the seed capital required to survive the next cyclical downturn.",
+        law1Tag: "Lesson: Don't neglect the margins",
+        law2Title: "The Law of Asymmetric Transfer",
+        law2Desc: "Discarded value does not disappear; it transfers. Inefficiency, neglected client segments, and wasted capital are consistently harvested by competitors, intermediaries, or disciplined third parties (the Medhak).",
+        law2Tag: "Lesson: Waste builds someone else's asset",
+        law3Title: "Forfeiture of Leverage",
+        law3Desc: "You cannot claim equity in value you willingly abandoned. Abandoning excess capital or opportunities creates no goodwill, builds no reserves, and yields no social or economic return.",
+        law3Tag: "Lesson: Discarded value yields zero equity",
+        directiveHeader: "How to Plug the 'Medhak Drain' Today",
+        dirTitle1: "Automate Retention",
+        dirText1: "Do not rely on saving what is left over at the end of the cycle. Capture margins at the source through automated investments, debt reduction, or dedicated reserve funds.",
+        dirTitle2: "Audit Operational Leakage",
+        dirText2: "Regularly evaluate recurring waste—idle subscriptions, unoptimized logistics, and unmonitored minor expenses. Compounded over years, these leaks equal a full reserve.",
+        dirTitle3: "Treat Every Margin as Capital",
+        dirText3: "Security is built not merely by the top-line income generated during peaks, but by the discipline maintained over the fractions that remain.",
+        creditNote: "Authored by Sunil Gupta",
+        printBtnText: "Print / Save PDF",
+        copyBtnText: "Copy Summary",
+        authorBio: "Sunil Gupta formulated The Medhak Theory as a vivid behavioral and economic framework. It explores how unmanaged prosperity turns into systemic vulnerability, and why disciplined preservation is the true foundation of long-term independence.",
+        toastMsg: "Summary copied to clipboard!",
+        listenText: "Listen",
+        stopText: "Stop Audio"
       },
       hi: {
-        heroBadge: "सुनील गुप्ता द्वारा मौलिक विचार एवं सिद्धांत",
-        heroTitle: `आपकी छोड़ी हुई बचत क्यों बन जाती है <br class="hidden sm:inline" /><span class="text-transparent bg-clip-text bg-gradient-to-r from-pond-800 via-pond-600 to-amber-600">किसी और की सबसे बड़ी ताक़त</span>`,
-        heroSubtitle: "हर आर्थिक भूल की शुरुआत मंदी या अकाल में नहीं, बल्कि भरपूर फसल के दौर में होती है। जब दिन अच्छे होते हैं, तब बर्बादी ख़तरा नहीं लगती—जब तक कि समय का पहिया हमेशा के लिए पलट न जाए।",
-        readFableBtn: "पूरी कथा पढ़ें",
-        viewTheoryBtn: "तीन नियम देखें",
-        principlesTitle: "मेंढक सिद्धांत के तीन मूल नियम",
-        principlesSubtitle: "सुनील गुप्ता द्वारा प्रतिपादित सिद्धांत, जो यह समझाता है कि संपन्नता के दौर में लोग अनजाने में अपनी सुरक्षा और नियंत्रण कैसे खो देते हैं।",
-        card1Title: "बची हुई बचत को बेकार समझने का भ्रम",
-        card1Text: "जब दैनिक ज़रूरतें पूरी हो जाती हैं, तो लोग बची हुई अतिरिक्त कमाई या साधनों को तुच्छ समझने लगते हैं। वे भूल जाते हैं कि यही अतिरिक्त बचत भविष्य के संकट की ढाल होती है।",
-        card1Tag: "भूल: बेपरवाह खर्चे और बचत की उपेक्षा",
-        card2Title: "मूल्य का असंतुलित हस्तांतरण",
-        card2Text: "बर्बाद किया गया संसाधन कभी नष्ट नहीं होता; वह केवल दूसरे हाथों में चला जाता है। आपकी लापरवाही और फेंके गए अवसरों को कोई अनुशासित तीसरा पक्ष (मेंढक) अपनी पूंजी बना लेता है।",
-        card2Tag: "सच्चाई: आपका फेंका कचरा किसी की संपत्ति बनता है",
-        card3Title: "अपने हक़ का हमेशा के लिए अंत",
-        card3Text: "जिस संसाधन को आपने खुद बेकार मानकर फेंक दिया, उस पर बाद में कोई हक़ नहीं जताया जा सकता। छोड़े गए साधन से न कोई साख बनती है और न ही कोई नैतिक अधिकार मिलता है।",
-        card3Tag: "परिणाम: छोड़ी गई पूंजी से कोई वफ़ादारी नहीं मिलती",
-        directivesTitle: "अपने जीवन में 'मेंढक के नुकसान' से कैसे बचें?",
-        dir1Head: "खर्च से पहले बचत तय करें",
-        dir1Desc: "महीने के अंत में जो बच जाए उसे बचाने की उम्मीद न रखें। कमाई हाथ में आते ही एक हिस्सा सीधे सुरक्षित निवेश या आपातकालीन फंड में अलग कर दें।",
-        dir2Head: "छोटे-छोटे नुकसान रोकें",
-        dir2Desc: "अपने बेकार पड़े सब्सक्रिप्शन, रोज़मर्रा की छोटी बर्बादी और बिना सोचे-समझे किए जाने वाले खर्चों का हिसाब रखें। सालों में जुड़कर ये बहुत बड़ी रकम बन जाती हैं।",
-        dir3Head: "हर छोटी बचत का सम्मान करें",
-        dir3Desc: "असली आर्थिक ताक़त सिर्फ़ इस बात से नहीं आती कि आपने अच्छे दिनों में कितना कमाया, बल्कि इससे आती है कि आपने अपनी बची हुई पूंजी को कितनी समझदारी से सहेजा।",
-        shareBtn: "मुख्य सारांश कॉपी करें",
-        toast: "सारांश क्लिपबोर्ड पर कॉपी हो गया!"
+        authorBadge: "सुनील गुप्ता द्वारा प्रतिपादित एवं रचित",
+        mainTitle: `आपकी छोड़ी हुई बचत क्यों बन जाती है <br class="hidden sm:inline" /><span class="text-transparent bg-clip-text bg-gradient-to-r from-forest-800 via-forest-700 to-amberMilk-600">किसी और की ताक़त</span>`,
+        mainSubtitle: "हर आर्थिक भूल की शुरुआत अकाल के समय नहीं, बल्कि भरपूर फसल के दौर में होती है। जब दिन अच्छे होते हैं, तब बर्बादी ख़तरा नहीं लगती—जब तक कि समय का पहिया पलट न जाए।",
+        tabStoryLabel: "कहानी और चित्र",
+        tabTheoryLabel: "तीन मूल नियम",
+        zoomHintText: "चित्र को बड़ा करके देखें",
+        illustrationCaption: "दूधवाला रोज़ बचे हुए दूध को शांत तालाब में डाल देता था, जहाँ मेंढक एक-एक बूंद को सहेजता रहा।",
+        customImgLabel: "चित्र बदलें",
+        theoryHeadline: "मेंढक सिद्धांत के तीन नियम",
+        theorySubheadline: "सुनील गुप्ता द्वारा प्रतिपादित एक बुनियादी आर्थिक नियम, जो व्यक्तिगत वित्त, स्टार्टअप और बड़े व्यापार—तीनों पर समान रूप से लागू होता है।",
+        law1Title: "अतिरिक्त बचत को बेकार समझने का भ्रम",
+        law1Desc: "जब बुनियादी ज़रूरतें पूरी हो जाती हैं, तो लोग बची हुई अतिरिक्त कमाई या साधनों को फ़िज़ूल समझने लगते हैं। वे भूल जाते हैं कि यही अतिरिक्त बचत मुश्किल समय की सुरक्षा ढाल होती है।",
+        law1Tag: "सीख: छोटी बचत की उपेक्षा न करें",
+        law2Title: "मूल्य का असंतुलित हस्तांतरण",
+        law2Desc: "बर्बाद किया गया संसाधन कभी नष्ट नहीं होता; वह केवल दूसरे हाथों में चला जाता है। आपकी लापरवाही और छोड़े गए अवसरों को कोई अनुशासित तीसरा पक्ष (मेंढक) अपनी पूंजी बना लेता है।",
+        law2Tag: "सच्चाई: आपका फेंका कचरा किसी की पूंजी बनता है",
+        law3Title: "अपने हक़ का अंत",
+        law3Desc: "जिस चीज़ को आपने अपनी मर्ज़ी से त्याग दिया, बाद में आप उस पर अपना अधिकार नहीं जता सकते। छोड़े गए साधन से न कोई साख बनती है, न कोई बैंक बैलेंस और न ही कोई नैतिक अधिकार।",
+        law3Tag: "परिणाम: छोड़ी गई पूंजी से कोई हक़ नहीं मिलता",
+        directiveHeader: "अपने जीवन में 'मेंढक के नुकसान' को कैसे रोकें?",
+        dirTitle1: "खर्च से पहले बचत तय करें",
+        dirText1: "महीने के अंत में जो बच जाए उसे बचाने की उम्मीद न रखें। कमाई हाथ में आते ही एक हिस्सा सीधे सुरक्षित निवेश, आपातकालीन फंड या बचत में अलग कर दें।",
+        dirTitle2: "छोटे-छोटे नुकसानों को पहचानें",
+        dirText2: "अपने बेकार पड़े सब्सक्रिप्शन, रोज़मर्रा की छोटी बर्बादी और बिना सोचे-समझे किए जाने वाले खर्चों का हिसाब रखें। सालों में जुड़कर ये बहुत बड़ी रकम बन जाती हैं।",
+        dirTitle3: "हर छोटी बचत को पूंजी समझें",
+        dirText3: "आर्थिक सुरक्षा सिर्फ़ इस बात से तय नहीं होती कि आपने अच्छे दिनों में कितना कमाया, बल्कि इससे तय होती है कि आपने अपनी बची हुई पूंजी को कितनी समझदारी से संभाला।",
+        creditNote: "लेखक: सुनील गुप्ता",
+        printBtnText: "प्रिंट / PDF सेव करें",
+        copyBtnText: "सारांश कॉपी करें",
+        authorBio: "सुनील गुप्ता ने 'मेंढक सिद्धांत' को एक व्यावहारिक एवं आर्थिक चिंतन के रूप में प्रस्तुत किया है। यह सिद्धांत सिखाता है कि कैसे संपन्नता के दौर में की गई लापरवाही भविष्य की कमजोरी बन जाती है, और अनुशासन ही सच्ची स्वतंत्रता की नींव है।",
+        toastMsg: "सारांश क्लिपबोर्ड पर कॉपी हो गया!",
+        listenText: "कहानी सुनें",
+        stopText: "ऑडियो रोकें"
       }
     };
 
-    let currentLang = 'en';
+    let activeLang = 'en';
+    let isSpeaking = false;
 
-    function switchLanguage(lang) {
-      currentLang = lang;
-      const dict = translations[lang];
-      
-      // Update toggle buttons styling
-      const enBtn = document.getElementById('langEnBtn');
-      const hiBtn = document.getElementById('langHiBtn');
+    function setLanguage(lang) {
+      activeLang = lang;
+      const dict = content[lang];
+
+      // Update button visual styles
+      const btnEn = document.getElementById('btnEn');
+      const btnHi = document.getElementById('btnHi');
 
       if (lang === 'en') {
-        enBtn.className = "px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-pond-900 shadow-sm";
-        hiBtn.className = "px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900";
+        btnEn.className = "px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 bg-white text-forest-900 shadow-sm";
+        btnHi.className = "px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 text-slate-600 hover:text-slate-900";
         document.body.classList.remove('font-devanagari');
-        document.getElementById('storyEnglish').classList.remove('hidden');
-        document.getElementById('storyHindi').classList.add('hidden');
+        document.getElementById('englishStoryWrap').classList.remove('hidden');
+        document.getElementById('hindiStoryWrap').classList.add('hidden');
       } else {
-        hiBtn.className = "px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-pond-900 shadow-sm";
-        enBtn.className = "px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900";
+        btnHi.className = "px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 bg-white text-forest-900 shadow-sm";
+        btnEn.className = "px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 text-slate-600 hover:text-slate-900";
         document.body.classList.add('font-devanagari');
-        document.getElementById('storyEnglish').classList.add('hidden');
-        document.getElementById('storyHindi').classList.remove('hidden');
+        document.getElementById('englishStoryWrap').classList.add('hidden');
+        document.getElementById('hindiStoryWrap').classList.remove('hidden');
       }
 
-      // Update text in DOM
-      document.getElementById('heroBadge').innerText = dict.heroBadge;
-      document.getElementById('heroTitle').innerHTML = dict.heroTitle;
-      document.getElementById('heroSubtitle').innerText = dict.heroSubtitle;
-      document.getElementById('readFableBtn').innerText = dict.readFableBtn;
-      document.getElementById('viewTheoryBtn').innerText = dict.viewTheoryBtn;
+      // Stop any current reading when switching language
+      if (isSpeaking) {
+        window.speechSynthesis.cancel();
+        isSpeaking = false;
+        document.getElementById('narrateBtn').classList.remove('narrating-pulse', 'bg-leaf-100');
+        document.getElementById('audioBtnText').innerText = dict.listenText;
+      }
 
-      document.getElementById('principlesTitle').innerText = dict.principlesTitle;
-      document.getElementById('principlesSubtitle').innerText = dict.principlesSubtitle;
+      // Update text in elements
+      document.getElementById('authorBadge').innerText = dict.authorBadge;
+      document.getElementById('mainTitle').innerHTML = dict.mainTitle;
+      document.getElementById('mainSubtitle').innerText = dict.mainSubtitle;
+      document.getElementById('tabStoryLabel').innerText = dict.tabStoryLabel;
+      document.getElementById('tabTheoryLabel').innerText = dict.tabTheoryLabel;
+      document.getElementById('zoomHintText').innerText = dict.zoomHintText;
+      document.getElementById('illustrationCaption').innerText = dict.illustrationCaption;
+      document.getElementById('customImgLabel').innerText = dict.customImgLabel;
 
-      document.getElementById('card1Title').innerText = dict.card1Title;
-      document.getElementById('card1Text').innerText = dict.card1Text;
-      document.getElementById('card1Tag').innerText = dict.card1Tag;
+      document.getElementById('theoryHeadline').innerText = dict.theoryHeadline;
+      document.getElementById('theorySubheadline').innerText = dict.theorySubheadline;
 
-      document.getElementById('card2Title').innerText = dict.card2Title;
-      document.getElementById('card2Text').innerText = dict.card2Text;
-      document.getElementById('card2Tag').innerText = dict.card2Tag;
+      document.getElementById('law1Title').innerText = dict.law1Title;
+      document.getElementById('law1Desc').innerText = dict.law1Desc;
+      document.getElementById('law1Tag').innerText = dict.law1Tag;
 
-      document.getElementById('card3Title').innerText = dict.card3Title;
-      document.getElementById('card3Text').innerText = dict.card3Text;
-      document.getElementById('card3Tag').innerText = dict.card3Tag;
+      document.getElementById('law2Title').innerText = dict.law2Title;
+      document.getElementById('law2Desc').innerText = dict.law2Desc;
+      document.getElementById('law2Tag').innerText = dict.law2Tag;
 
-      document.getElementById('directivesTitle').innerText = dict.directivesTitle;
-      document.getElementById('dir1Head').innerText = dict.dir1Head;
-      document.getElementById('dir1Desc').innerText = dict.dir1Desc;
-      document.getElementById('dir2Head').innerText = dict.dir2Head;
-      document.getElementById('dir2Desc').innerText = dict.dir2Desc;
-      document.getElementById('dir3Head').innerText = dict.dir3Head;
-      document.getElementById('dir3Desc').innerText = dict.dir3Desc;
+      document.getElementById('law3Title').innerText = dict.law3Title;
+      document.getElementById('law3Desc').innerText = dict.law3Desc;
+      document.getElementById('law3Tag').innerText = dict.law3Tag;
 
-      document.getElementById('shareBtn').querySelector('span').innerText = dict.shareBtn;
-      document.getElementById('toastMsg').innerText = dict.toast;
+      document.getElementById('directiveHeader').innerText = dict.directiveHeader;
+      document.getElementById('dirTitle1').innerText = dict.dirTitle1;
+      document.getElementById('dirText1').innerText = dict.dirText1;
+      document.getElementById('dirTitle2').innerText = dict.dirTitle2;
+      document.getElementById('dirText2').innerText = dict.dirText2;
+      document.getElementById('dirTitle3').innerText = dict.dirTitle3;
+      document.getElementById('dirText3').innerText = dict.dirText3;
 
-      // Update header links
-      document.querySelectorAll('nav a').forEach(el => {
-        el.innerText = el.getAttribute('data-' + lang);
-      });
+      document.getElementById('creditNote').innerText = dict.creditNote;
+      document.getElementById('printBtnText').innerText = dict.printBtnText;
+      document.getElementById('copyBtnText').innerText = dict.copyBtnText;
+      document.getElementById('authorBio').innerHTML = dict.authorBio;
+      document.getElementById('toastMsg').innerText = dict.toastMsg;
+      document.getElementById('audioBtnText').innerText = dict.listenText;
     }
 
-    // Copy Summary Helper Function
-    function copyFrameworkQuote() {
-      const summaryText = currentLang === 'en' 
-        ? "The Medhak Theory by Sunil Gupta: 1. The Fallacy of Disposable Surplus. 2. The Law of Asymmetric Transfer (your waste becomes someone else's asset). 3. Forfeiture of Leverage (discarded resources yield zero claims). Always save today's abundance for tomorrow's need."
-        : "मेंढक सिद्धांत (सुनील गुप्ता द्वारा): 1. अतिरिक्त बचत को बेकार समझने का भ्रम। 2. मूल्य का असंतुलित हस्तांतरण (आपकी बर्बादी किसी और की ताक़त बन जाती है)। 3. अपने हक़ का अंत। आज की बचत ही कल का सहारा होती है।";
+    // Lightbox Controls
+    function openLightbox() {
+      const modal = document.getElementById('imageLightbox');
+      const src = document.getElementById('storyIllustrationImg').src;
+      document.getElementById('lightboxImg').src = src;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
 
-      // Execute copy safely
-      const tempInput = document.createElement("textarea");
-      tempInput.value = summaryText;
-      document.body.appendChild(tempInput);
-      tempInput.select();
+    function closeLightbox() {
+      const modal = document.getElementById('imageLightbox');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // User Image Swap Helper
+    function uploadCustomImage(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          document.getElementById('storyIllustrationImg').src = evt.target.result;
+          document.getElementById('lightboxImg').src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Image fallback in case the local image file is loaded in isolated frames
+    function handleImageFallback(img) {
+      // Graceful high-resolution fallback generator placeholder
+      img.onerror = null;
+      img.src = 'https://placehold.co/1200x675/1F402B/FAF8F5?text=The+Medhak+Theory+%E2%80%A2+Sunil+Gupta';
+    }
+
+    // Audio narration via Web Speech Synthesis API
+    function toggleSpeech() {
+      if (!('speechSynthesis' in window)) {
+        alert("Text-to-speech is not supported by your current browser.");
+        return;
+      }
+
+      const narrateBtn = document.getElementById('narrateBtn');
+      const audioBtnText = document.getElementById('audioBtnText');
+      const dict = content[activeLang];
+
+      if (isSpeaking) {
+        window.speechSynthesis.cancel();
+        isSpeaking = false;
+        narrateBtn.classList.remove('narrating-pulse', 'bg-leaf-100');
+        audioBtnText.innerText = dict.listenText;
+      } else {
+        const textToRead = activeLang === 'en'
+          ? "The Medhak Theory, by Sunil Gupta. In a prosperous village, a milkman delivered fresh milk every morning. Because his daily needs were met, he threw the leftover milk into a quiet pond. There lived a green frog, a Medhak, who gathered every drop. Years later during a drought, the milkman had nothing and begged the frog for help. The frog refused, saying: You sold what you had, lived comfortably, and threw away the rest. What you discarded, I turned into my asset through discipline. I owe you nothing. The moral: The surplus you discard today is the leverage you surrender tomorrow."
+          : "सुनील गुप्ता द्वारा मेंढक सिद्धांत। एक संपन्न गांव में दूधवाला रोज़ ताज़ा दूध बेचता था। दिन भर की कमाई के बाद जो दूध बचता, वह उसे बेकार समझकर तालाब में बहा देता था। तालाब में एक मेंढक रहता था, जिसने सालों तक उस दूध को सहेजा। जब सूखा पड़ा और दूधवाले के पास कुछ नहीं बचा, तो वह मेंढक से मदद मांगने गया। मेंढक ने साफ़ मना कर दिया और कहा: तुमने जिसे कचरा समझकर फेंका, उसे मैंने अपनी मेहनत से पूंजी बना लिया। अब इस पर तुम्हारा कोई हक़ नहीं है। आज की बचत ही कल का सहारा होती है।";
+
+        const utterance = new SpeechSynthesisUtterance(textToRead);
+        utterance.lang = activeLang === 'en' ? 'en-US' : 'hi-IN';
+        utterance.rate = 0.95;
+
+        utterance.onend = function() {
+          isSpeaking = false;
+          narrateBtn.classList.remove('narrating-pulse', 'bg-leaf-100');
+          audioBtnText.innerText = dict.listenText;
+        };
+
+        utterance.onerror = function() {
+          isSpeaking = false;
+          narrateBtn.classList.remove('narrating-pulse', 'bg-leaf-100');
+          audioBtnText.innerText = dict.listenText;
+        };
+
+        window.speechSynthesis.speak(utterance);
+        isSpeaking = true;
+        narrateBtn.classList.add('narrating-pulse', 'bg-leaf-100');
+        audioBtnText.innerText = dict.stopText;
+      }
+    }
+
+    // Copy Summary Helper
+    function copySummary() {
+      const summaryText = activeLang === 'en'
+        ? "The Medhak Theory by Sunil Gupta:\n1. The Fallacy of Disposable Surplus: Excess is not trash; it is deferred security.\n2. The Law of Asymmetric Transfer: Your discarded waste becomes someone else's asset.\n3. Forfeiture of Leverage: Discarding value creates zero equity or claims.\nAlways preserve today's surplus for tomorrow's drought."
+        : "मेंढक सिद्धांत - लेखक: सुनील गुप्ता\n1. अतिरिक्त बचत को बेकार समझने का भ्रम: अतिरिक्त साधन कचरा नहीं, भविष्य की सुरक्षा हैं।\n2. मूल्य का असंतुलित हस्तांतरण: आपकी छोड़ी हुई पूंजी किसी और की ताक़त बन जाती है।\n3. अपने हक़ का अंत: छोड़े गए साधनों पर कोई नैतिक या आर्थिक दावा नहीं रहता।\nआज की बचत ही कल का सहारा होती है।";
+
+      const temp = document.createElement("textarea");
+      temp.value = summaryText;
+      document.body.appendChild(temp);
+      temp.select();
       try {
         document.execCommand('copy');
-        showToast();
+        triggerToast();
       } catch (err) {
-        console.error('Copy failed:', err);
+        console.error("Copy failed", err);
       }
-      document.body.removeChild(tempInput);
+      document.body.removeChild(temp);
     }
 
-    function showToast() {
+    function triggerToast() {
       const toast = document.getElementById('toast');
       toast.classList.remove('translate-y-24', 'opacity-0');
       toast.classList.add('translate-y-0', 'opacity-100');
@@ -666,7 +773,11 @@
         toast.classList.remove('translate-y-0', 'opacity-100');
       }, 3000);
     }
+
+    // Keyboard escape to close lightbox
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
   </script>
 </body>
 </html>
-```
